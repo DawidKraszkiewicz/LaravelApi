@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Services\User\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -31,14 +32,9 @@ class UserController extends Controller {
 
         $user = $this->userService->create($data);
 
-        return redirect()->route('users.show', $user->id);
+        return redirect()->route('users.index', $user->id);
     }
-    public function show(int $id): View {
-        $user = $this->userService->find($id);
-        return view('users.show', compact('user'));
-    }
-
-    public function edit(int $id){
+    public function edit(int $id): View {
         $user = $this->userService->find($id);
         return view('users.edit', compact('user'));
     }
@@ -48,7 +44,7 @@ class UserController extends Controller {
 
         $user = $this->userService->update($data, $id);
 
-        return redirect()->route('users.show', $user->id);
+        return redirect()->route('users.edit', $user->id)->with('success', 'User updated successfully');
     }
     public function destroy(int $id): RedirectResponse
     {
