@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace App\Services\User;
 
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\Repositories\UserRepository;
 
 class UserService {
     protected UserRepositoryInterface $userRepository;
