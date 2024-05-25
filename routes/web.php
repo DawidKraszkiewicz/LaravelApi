@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,9 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login.submit');
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::get('/token', function () {
     return csrf_token();
 });
