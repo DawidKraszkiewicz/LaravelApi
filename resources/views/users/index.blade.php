@@ -1,3 +1,4 @@
+<table>
 @foreach( $users as $user )
     <tr>
         <td>{{ $user->id }}</td>
@@ -16,3 +17,16 @@
         </td>
     </tr>
 @endforeach
+</table>
+
+    @if(Auth::user()->role == 1)
+        <a href="{{route('users.create')}}">
+            <button> add user </button>
+        </a>
+        <form action="{{ route('auth.logout') }}" method="POST">
+            @csrf
+            @method('POST')
+            <button type="submit" class="btn btn-danger">logout</button>
+        </form>
+    @endif
+
