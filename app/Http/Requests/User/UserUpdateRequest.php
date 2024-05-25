@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Http\FormRequest;
+
 class UserUpdateRequest extends FormRequest
 {
     /**
@@ -26,6 +26,7 @@ class UserUpdateRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|unique:users,email,' . $this->route('id'),
             'password' => 'required|confirmed',
+            'role' => 'required|in:0,1|integer'
         ];
     }
     /**
